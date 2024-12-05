@@ -1,7 +1,25 @@
-let gridSize = 16;
 const container = document.querySelector("#container");
 
-document.addEventListener("DOMContentLoaded", displayGrid);
+
+const resetBtn = document.querySelector("#reset");
+const changeGridBtn = document.querySelector('#change');
+changeGridBtn.addEventListener('click', () => {
+  const gridSize = parseInt(prompt('Enter your desired grid size: (max 100)'));
+  if (gridSize > 100) {
+    alert('Maximum number of input is 100');
+    return;
+  }
+  //? remove container grid first
+  container.innerHTML = "";
+  displayGrid(gridSize);
+})
+
+resetBtn.addEventListener("click", () => {
+  container.innerHTML = "";
+  displayGrid();
+})
+
+document.addEventListener("DOMContentLoaded", () => displayGrid());
 
 //? This function will listen to mouse over event, when it occurs change the target element
 //? background color to a random hex number achieved using Math.random
@@ -14,17 +32,9 @@ container.addEventListener("mouseover", (e) => {
   }
 });
 
-//? When the mouse is out of container area, set each grid elements background to white (reset it)
-container.addEventListener("mouseleave", () => {
-  const gridElement = document.querySelectorAll(".grid");
-  gridElement.forEach((element) => {
-    element.style.background = "white";
-  });
-});
-
 //? When DOM is loaded or user inputted grid size, 
 //? this function will display grids that fill the container
-function displayGrid() {
+function displayGrid(gridSize = 16) {
   const containerSize = parseInt(window.getComputedStyle(container).getPropertyValue("width"));
   const gridElementSize = String(containerSize / gridSize);
 
