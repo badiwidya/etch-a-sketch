@@ -1,3 +1,3 @@
 # Etch a Sketch
 
-Man this is hard.
+Guess what, this is not that hard like what was i thinking.
