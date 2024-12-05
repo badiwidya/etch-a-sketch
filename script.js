@@ -1,8 +1,30 @@
 let gridSize = 16;
 const container = document.querySelector("#container");
 
-//? When DOM is loaded, this function will display grids that fill the container
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", displayGrid);
+
+//? This function will listen to mouse over event, when it occurs change the target element
+//? background color to a random hex number achieved using Math.random
+container.addEventListener("mouseover", (e) => {
+  let randomColor = Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, "0");
+  if (e.target.getAttribute("class") === "grid") {
+    e.target.style.background = `#${randomColor}`;
+  }
+});
+
+//? When the mouse is out of container area, set each grid elements background to white (reset it)
+container.addEventListener("mouseleave", () => {
+  const gridElement = document.querySelectorAll(".grid");
+  gridElement.forEach((element) => {
+    element.style.background = "white";
+  });
+});
+
+//? When DOM is loaded or user inputted grid size, 
+//? this function will display grids that fill the container
+function displayGrid() {
   const containerSize = parseInt(window.getComputedStyle(container).getPropertyValue("width"));
   const gridElementSize = String(containerSize / gridSize);
 
@@ -14,21 +36,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     container.appendChild(gridElement);
   }
-});
-
-//? This function will listen to mouse over event, when it occurs change the target element
-//? background color to a random hex number achieved using Math.random
-container.addEventListener("mouseover", (e) => {
-  let randomColor = Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
-  if (e.target.getAttribute('class') === 'grid') {
-    e.target.style.background = `#${randomColor}`;
-  }
-});
-
-//? When the mouse is out of container area, set each grid elements background to white (reset it)
-container.addEventListener("mouseleave", () => {
-  const gridElement = document.querySelectorAll('.grid');
-  gridElement.forEach(element => {
-    element.style.background = "white";
-  });
-});
+}
