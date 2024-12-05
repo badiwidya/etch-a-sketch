@@ -1,25 +1,28 @@
 const container = document.querySelector("#container");
 
+//? Idk why the page screen cannot be scrolled through the top LOL (the button isn't visible)
+document.addEventListener("DOMContentLoaded", () => {
+  alert("Please zoom out the page if the container is not in full view.");
+  displayGrid();
+});
 
 const resetBtn = document.querySelector("#reset");
-const changeGridBtn = document.querySelector('#change');
-changeGridBtn.addEventListener('click', () => {
-  const gridSize = parseInt(prompt('Enter your desired grid size: (max 100)'));
+const changeGridBtn = document.querySelector("#change");
+changeGridBtn.addEventListener("click", () => {
+  const gridSize = parseInt(prompt("Enter your desired grid size: (max 100)"));
   if (gridSize > 100) {
-    alert('Maximum number of input is 100');
+    alert("Maximum number of input is 100");
     return;
   }
   //? remove container grid first
   container.innerHTML = "";
   displayGrid(gridSize);
-})
+});
 
 resetBtn.addEventListener("click", () => {
   container.innerHTML = "";
   displayGrid();
-})
-
-document.addEventListener("DOMContentLoaded", () => displayGrid());
+});
 
 //? This function will listen to mouse over event, when it occurs change the target element
 //? background color to a random hex number achieved using Math.random
@@ -32,7 +35,7 @@ container.addEventListener("mouseover", (e) => {
   }
 });
 
-//? When DOM is loaded or user inputted grid size, 
+//? When DOM is loaded or user inputted grid size,
 //? this function will display grids that fill the container
 function displayGrid(gridSize = 16) {
   const containerSize = parseInt(window.getComputedStyle(container).getPropertyValue("width"));
