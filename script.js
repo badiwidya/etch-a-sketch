@@ -15,3 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
     container.appendChild(gridElement);
   }
 });
+
+//? This function will listen to mouse over event, when it occurs change the target element
+//? background color to a random hex number achieved using Math.random
+container.addEventListener("mouseover", (e) => {
+  let randomColor = Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+  if (e.target.getAttribute('class') === 'grid') {
+    e.target.style.background = `#${randomColor}`;
+  }
+});
+
