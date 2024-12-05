@@ -25,3 +25,10 @@ container.addEventListener("mouseover", (e) => {
   }
 });
 
+//? When the mouse is out of container area, set each grid elements background to white (reset it)
+container.addEventListener("mouseleave", () => {
+  const gridElement = document.querySelectorAll('.grid');
+  gridElement.forEach(element => {
+    element.style.background = "white";
+  });
+});
